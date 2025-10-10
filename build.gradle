@@ -1,0 +1,113 @@
+buildscript {
+    repositories {
+        maven { url = 'https://maven.minecraftforge.net' }
+        maven { url = 'https://repo.spongepowered.org/repository/maven-public/' } // <— wichtig für mixingradle
+        mavenCentral()
+    }
+    dependencies {
+        classpath group: 'net.minecraftforge.gradle', name: 'ForgeGradle', version: '5.1.+', changing: true
+        classpath 'org.spongepowered:mixingradle:0.7-SNAPSHOT'                    // <— Mixin Gradle Plugin
+    }
+}
+
+apply plugin: 'net.minecraftforge.gradle'
+apply plugin: 'org.spongepowered.mixin'     // <— statt plugins{}-Block
+apply plugin: 'eclipse'
+apply plugin: 'maven-publish'
+
+version = '0.1.0'
+group = 'at.riemer.arkcraft'
+archivesBaseName = 'arkcraft'
+
+java.toolchain.languageVersion = JavaLanguageVersion.of(8)
+
+println('Java: ' + System.getProperty('java.version') +
+        ' JVM: ' + System.getProperty('java.vm.version') +
+        '(' + System.getProperty('java.vendor') +
+        ') Arch: ' + System.getProperty('os.arch'))
+
+minecraft {
+    mappings channel: 'snapshot', version: '20210309-1.16.5'
+
+    runs {
+        client {
+            workingDirectory project.file('run/client')
+
+            // Set fake login / offline mode user
+            args '--username', 'Felix', '--demo', 'false'
+            jvmArg '-Dfml.doNotCheckOnline=true'
+            jvmArg '-DallowInsecureLocalConnections=true'
+            jvmArg '-Duser.name=Felix'
+            property 'allowInsecureLocalConnections', 'true'
+
+            mods {
+                arkcraft { source sourceSets.main }
+            }
+        }
+
+        server {
+            workingDirectory project.file('run/server')
+            property 'forge.server.noGui', 'true' // 👈 wichtig!
+            property 'forge.logging.console.level', 'debug'
+            mods { arkcraft { source sourceSets.main } }
+        }
+        data {
+            workingDirectory project.file('run/data')
+            property 'forge.logging.markers', 'REGISTRIES'
+            property 'forge.logging.console.level', 'debug'
+            args '--mod', 'arkcraft', '--all',
+                    '--output', file('src/generated/resources/'),
+                    '--existing', file('src/main/resources/')
+            mods { arkcraft { source sourceSets.main } }
+        }
+    }
+}
+
+sourceSets.main.resources { srcDir 'src/generated/resources' }
+
+repositories {
+    maven { url = 'https://maven.minecraftforge.net' }
+    mavenCentral()
+}
+
+dependencies {
+    minecraft 'net.minecraftforge:forge:1.16.5-36.2.34'
+    annotationProcessor 'org.spongepowered:mixin:0.8.5:processor'
+    implementation 'mysql:mysql-connector-java:8.0.33'
+}
+
+mixin {
+    add sourceSets.main, "arkcraft.mixin-refmap.json"
+    // optional, aber hilfreich beim Debuggen:
+    debug.verbose = true
+    dumpTargetOnFailure = true
+}
+
+jar {
+    manifest {
+        attributes([
+                "Specification-Title": "arkcraft",
+                "Specification-Vendor": "Felix Riemer",
+                "Specification-Version": "1",
+                "Implementation-Title": project.name,
+                "Implementation-Version": "${version}",
+                "Implementation-Vendor": "Felix Riemer",
+                "Implementation-Timestamp": new Date().format("yyyy-MM-dd'T'HH:mm:ssZ"),
+        ])
+    }
+}
+
+jar.finalizedBy('reobfJar')
+
+publishing {
+    publications { mavenJava(MavenPublication) { artifact jar } }
+    repositories { maven { url "file:///${project.projectDir}/mcmodsrepo" } }
+}
+
+configurations.all {
+    resolutionStrategy.eachDependency { details ->
+        if (details.requested.group == "org.lwjgl") {
+            details.useVersion "3.3.2"
+        }
+    }
+}

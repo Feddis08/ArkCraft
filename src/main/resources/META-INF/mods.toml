@@ -1,0 +1,29 @@
+modLoader="javafml"                      # Pflicht
+loaderVersion="[36,)"                    # Forge 36.x (MC 1.16.5)
+license="MIT"                            # wähle deine Lizenz
+
+[[mods]]
+modId="arkcraft"                         # MUSS zu @Mod("arkcraft") passen
+version="${file.jarVersion}"
+displayName="ArkCraft"
+logoFile="icon.png"                      # liegt im JAR-Root (src/main/resources/icon.png)
+credits=""
+authors="Felix Riemer"
+description='''
+eine tolle mod
+'''
+
+# Abhängigkeiten
+[[dependencies.arkcraft]]
+modId="forge"
+mandatory=true
+versionRange="[36,)"
+ordering="NONE"
+side="BOTH"
+
+[[dependencies.arkcraft]]
+modId="minecraft"
+mandatory=true
+versionRange="[1.16.5,1.17)"
+ordering="NONE"
+side="BOTH"

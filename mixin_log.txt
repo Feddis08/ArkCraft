@@ -1,0 +1,29 @@
+[10Oct2025 15:25:29.920] [main/DEBUG] [net.minecraftforge.fml.loading.moddiscovery.ModFileInfo/LOADING]: Found valid mod file main with {arkcraft} mods - versions {NONE}
+[10Oct2025 15:25:31.789] [main/DEBUG] [mixin/]: Error cleaning class output directory: .mixin.out
+[10Oct2025 15:25:44.933] [modloading-worker-2/INFO] [ArkCraft/]: [ArkCraft] Headless server mode enabled.
+[10Oct2025 15:25:44.947] [modloading-worker-2/INFO] [ArkCraft/]: ArkCraft initialized on dist: DEDICATED_SERVER
+[10Oct2025 15:25:45.196] [modloading-worker-2/INFO] [ArkCraft/]: [ArkCraft] Loaded on DEDICATED_SERVER (production: false)
+[10Oct2025 15:25:45.242] [modloading-worker-2/DEBUG] [net.minecraftforge.fml.AutomaticEventSubscriber/LOADING]: Attempting to inject @EventBusSubscriber classes into the eventbus for arkcraft
+[10Oct2025 15:25:46.551] [modloading-worker-2/INFO] [ArkCraft/]: ArkCraft: Common setup
+[10Oct2025 15:25:52.640] [main/DEBUG] [net.minecraftforge.fml.server.ServerLifecycleHooks/CORE]: Generating PackInfo named mod:arkcraft for mod file /Users/felixriemer/Projects/MinecraftMOD/build/resources/main
+[10Oct2025 15:25:53.096] [main/WARN] [net.minecraft.command.Commands/]: Ambiguity between arguments [teleport, destination] and [teleport, targets] with inputs: [Player, 0123, @e, dd12be42-52a9-4a91-a8a1-11c01849e498]
+[10Oct2025 15:25:53.098] [main/WARN] [net.minecraft.command.Commands/]: Ambiguity between arguments [teleport, location] and [teleport, destination] with inputs: [0.1 -0.5 .9, 0 0 0]
+[10Oct2025 15:25:53.099] [main/WARN] [net.minecraft.command.Commands/]: Ambiguity between arguments [teleport, location] and [teleport, targets] with inputs: [0.1 -0.5 .9, 0 0 0]
+[10Oct2025 15:25:53.099] [main/WARN] [net.minecraft.command.Commands/]: Ambiguity between arguments [teleport, targets] and [teleport, destination] with inputs: [Player, 0123, dd12be42-52a9-4a91-a8a1-11c01849e498]
+[10Oct2025 15:25:53.100] [main/WARN] [net.minecraft.command.Commands/]: Ambiguity between arguments [teleport, targets, location] and [teleport, targets, destination] with inputs: [0.1 -0.5 .9, 0 0 0]
+[10Oct2025 15:26:09.428] [Server thread/INFO] [ArkCraft/]: ArkCraft: Server starting
+[10Oct2025 15:25:39.580] [main/DEBUG] [mixin/]: Error cleaning class output directory: .mixin.out
+[10Oct2025 15:25:59.821] [modloading-worker-2/INFO] [ArkCraft/]: [ArkCraft] Client mixins loaded.
+[10Oct2025 15:25:59.826] [modloading-worker-2/INFO] [ArkCraft/]: ArkCraft initialized on dist: CLIENT
+[10Oct2025 15:25:59.867] [modloading-worker-2/DEBUG] [mixin/]: Selecting config arkcraft.mixin.json
+[10Oct2025 15:25:59.880] [modloading-worker-2/WARN] [mixin/]: Reference map 'arkcraft.mixin-refmap.json' for arkcraft.mixin.json could not be read. If this is a development environment you can ignore this message
+[10Oct2025 15:25:59.881] [modloading-worker-2/DEBUG] [mixin/]: Preparing arkcraft.mixin.json (1)
+[10Oct2025 15:26:00.348] [modloading-worker-2/INFO] [ArkCraft/]: [ArkCraft] Registered mixin config: arkcraft.mixin.json
+[10Oct2025 15:26:00.428] [modloading-worker-2/INFO] [ArkCraft/]: [ArkCraft] Loaded on CLIENT (production: false)
+[10Oct2025 15:26:00.484] [modloading-worker-2/DEBUG] [net.minecraftforge.fml.AutomaticEventSubscriber/LOADING]: Attempting to inject @EventBusSubscriber classes into the eventbus for arkcraft
+[10Oct2025 15:26:01.410] [Render thread/DEBUG] [net.minecraftforge.fml.client.ClientModLoader/CORE]: Generating PackInfo named mod:arkcraft for mod file /Users/felixriemer/Projects/MinecraftMOD/build/resources/main
+[10Oct2025 15:26:04.001] [Render thread/DEBUG] [mixin/]: Mixing MojangLogoTextureMixin from arkcraft.mixin.json into net.minecraft.client.gui.ResourceLoadProgressGui$MojangLogoTexture
+[10Oct2025 15:26:04.220] [Render thread/INFO] [ArkCraft/]: [ArkCraft] Splash from classpath: assets/arkcraft/textures/gui/splash.png
+[10Oct2025 15:26:04.351] [Worker-Main-9/INFO] [ArkCraft/]: ArkCraft: Common setup
+[10Oct2025 15:26:04.818] [Worker-Main-14/INFO] [ArkCraft/]: ArkCraft: Client setup
+[10Oct2025 15:26:09.186] [Render thread/INFO] [ArkCraft/]: [ArkCraft] Splash from resource manager: arkcraft:textures/gui/splash.png
