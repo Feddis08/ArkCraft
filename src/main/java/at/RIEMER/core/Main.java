@@ -1,74 +1,73 @@
 package at.RIEMER.core;
 
+import at.RIEMER.client.ClientInit;
 import at.RIEMER.server.ServerBoot;
+import net.minecraft.client.Minecraft;
+import net.minecraft.client.gui.screen.ChatScreen;
+import net.minecraft.entity.player.ChatVisibility;
+import net.minecraftforge.client.event.InputEvent;
 import net.minecraftforge.common.MinecraftForge;
 import net.minecraftforge.eventbus.api.SubscribeEvent;
 import net.minecraftforge.fml.common.Mod;
+import net.minecraftforge.fml.event.lifecycle.FMLClientSetupEvent;
 import net.minecraftforge.fml.event.lifecycle.FMLCommonSetupEvent;
 import net.minecraftforge.fml.event.server.FMLServerStartingEvent;
 import net.minecraftforge.fml.javafmlmod.FMLJavaModLoadingContext;
-
 import net.minecraftforge.api.distmarker.Dist;
 import net.minecraftforge.fml.DistExecutor;
 import net.minecraftforge.fml.loading.FMLEnvironment;
 
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
-
-// mixin
+import org.lwjgl.glfw.GLFW;
 import org.spongepowered.asm.mixin.Mixins;
 
 import java.util.concurrent.atomic.AtomicBoolean;
 
+import static org.lwjgl.glfw.GLFW.GLFW_PRESS;
+
 @Mod(Main.MOD_ID)
 public class Main {
     public static final String MOD_ID = "arkcraft";
-    private static final Logger LOGGER = LogManager.getLogger("ArkCraft");
+    public static final Logger LOGGER = LogManager.getLogger("ArkCraft");
 
-    // avoid adding the same mixin config twice (e.g., in hot-reload/dev)
-    private static final AtomicBoolean MIXIN_ADDED = new AtomicBoolean(false);
-    private static final String MIXIN_CONFIG = "arkcraft.mixin.json";
+    private static final String MIXIN_EARLY  = "arkcraft-early.mixin.json"; // Splash/Logo
+    private static final String MIXIN_NORMAL = "arkcraft.mixin.json";       // Chat/UI etc.
+
+    private static final AtomicBoolean MIXIN_ADDED_EARLY  = new AtomicBoolean(false);
+    private static final AtomicBoolean MIXIN_ADDED_NORMAL = new AtomicBoolean(false);
 
     public Main() {
         if (FMLEnvironment.dist == Dist.CLIENT) {
-            // force client to be non-demo, enable multiplayer
-            try {
-                Class<?> mcClass = Class.forName("net.minecraft.client.Minecraft");
-                java.lang.reflect.Field demoField = mcClass.getDeclaredField("field_71362_n"); // isDemo
-                demoField.setAccessible(true);
-                demoField.set(null, false);
-                LOGGER.info("[ArkCraft] Forced Minecraft out of demo mode.");
-            } catch (Exception e) {
-                LOGGER.warn("[ArkCraft] Could not disable demo mode: {}", e.toString());
-            }
-
+            FMLJavaModLoadingContext.get().getModEventBus().addListener(ClientInit::onClientSetup);
+            // Nur harmlose System-Properties im Konstruktor (kein Zugriff auf Minecraft-Klassen!)
             System.setProperty("allowInsecureLocalConnections", "true");
             System.setProperty("fml.doNotCheckOnline", "true");
             System.setProperty("user.name", "Felix");
-            Mixins.addConfiguration("arkcraft.mixin.json");
-            LOGGER.info("[ArkCraft] Client mixins loaded and multiplayer unlocked.");
+
+            // EARLY Mixins können hier hinzugefügt werden
+            try {
+                if (MIXIN_ADDED_EARLY.compareAndSet(false, true)) {
+                    Mixins.addConfiguration(MIXIN_EARLY);
+                    LOGGER.info("[ArkCraft] Early mixin loaded: {}", MIXIN_EARLY);
+                }
+            } catch (Throwable t) {
+                LOGGER.error("[ArkCraft] Failed to add early mixin: {}", MIXIN_EARLY, t);
+            }
         } else {
-            // Dedicated server headless
+            // Dedicated Server headless
             System.setProperty("nogui", "true");
             System.setProperty("forge.server.noGui", "true");
             System.setProperty("java.awt.headless", "true");
             LOGGER.info("[ArkCraft] Headless server mode enabled.");
         }
 
-        LOGGER.info("ArkCraft initialized on dist: {}", FMLEnvironment.dist);
-
-
-        // Always: common setup listener
+        // Forge wiring
         FMLJavaModLoadingContext.get().getModEventBus().addListener(this::commonSetup);
-
-        // Client-only: register client listeners + mixin config
-        DistExecutor.safeRunWhenOn(Dist.CLIENT, () -> ClientSide::init);
-
-        // Forge event bus for server/common events
         MinecraftForge.EVENT_BUS.register(this);
 
-        // Log basic environment info to help diagnose side issues
-        LOGGER.info("[ArkCraft] Loaded on {} (production: {})",
+
+        LOGGER.info("[ArkCraft] Initialized on dist: {} (production: {})",
                 FMLEnvironment.dist, FMLEnvironment.production);
     }
 
@@ -82,39 +81,8 @@ public class Main {
         ServerBoot.boot();
     }
 
-    /** All client-only wiring lives here so it never touches a dedicated server. */
-    private static final class ClientSide implements DistExecutor.SafeRunnable {
-        static void init() {
-            // client lifecycle listener
-            FMLJavaModLoadingContext.get().getModEventBus().addListener(ClientSide::clientSetup);
-
-            // defensively add mixin config on client only
-            try {
-                if (MIXIN_ADDED.get()) {
-                    LOGGER.debug("[ArkCraft] Mixin config already added; skipping.");
-                    return;
-                }
-
-                if (Main.class.getClassLoader().getResource(MIXIN_CONFIG) != null) {
-                    Mixins.addConfiguration(MIXIN_CONFIG);
-                    MIXIN_ADDED.set(true);
-                    LOGGER.info("[ArkCraft] Registered mixin config: {}", MIXIN_CONFIG);
-                } else {
-                    LOGGER.error("[ArkCraft] Mixin config NOT found on classpath: {}", MIXIN_CONFIG);
-                }
-            } catch (Throwable t) {
-                // never crash the game if mixin registration has an issue
-                LOGGER.error("[ArkCraft] Failed to add mixin configuration: {}", MIXIN_CONFIG, t);
-            }
-        }
-
-        private static void clientSetup(final net.minecraftforge.fml.event.lifecycle.FMLClientSetupEvent event) {
-            LOGGER.info("ArkCraft: Client setup");
-        }
-
-        @Override
-        public void run() {
-            init();
-        }
-    }
 }
+
+
+
+

@@ -1,29 +1,71 @@
-[10Oct2025 15:25:29.920] [main/DEBUG] [net.minecraftforge.fml.loading.moddiscovery.ModFileInfo/LOADING]: Found valid mod file main with {arkcraft} mods - versions {NONE}
-[10Oct2025 15:25:31.789] [main/DEBUG] [mixin/]: Error cleaning class output directory: .mixin.out
-[10Oct2025 15:25:44.933] [modloading-worker-2/INFO] [ArkCraft/]: [ArkCraft] Headless server mode enabled.
-[10Oct2025 15:25:44.947] [modloading-worker-2/INFO] [ArkCraft/]: ArkCraft initialized on dist: DEDICATED_SERVER
-[10Oct2025 15:25:45.196] [modloading-worker-2/INFO] [ArkCraft/]: [ArkCraft] Loaded on DEDICATED_SERVER (production: false)
-[10Oct2025 15:25:45.242] [modloading-worker-2/DEBUG] [net.minecraftforge.fml.AutomaticEventSubscriber/LOADING]: Attempting to inject @EventBusSubscriber classes into the eventbus for arkcraft
-[10Oct2025 15:25:46.551] [modloading-worker-2/INFO] [ArkCraft/]: ArkCraft: Common setup
-[10Oct2025 15:25:52.640] [main/DEBUG] [net.minecraftforge.fml.server.ServerLifecycleHooks/CORE]: Generating PackInfo named mod:arkcraft for mod file /Users/felixriemer/Projects/MinecraftMOD/build/resources/main
-[10Oct2025 15:25:53.096] [main/WARN] [net.minecraft.command.Commands/]: Ambiguity between arguments [teleport, destination] and [teleport, targets] with inputs: [Player, 0123, @e, dd12be42-52a9-4a91-a8a1-11c01849e498]
-[10Oct2025 15:25:53.098] [main/WARN] [net.minecraft.command.Commands/]: Ambiguity between arguments [teleport, location] and [teleport, destination] with inputs: [0.1 -0.5 .9, 0 0 0]
-[10Oct2025 15:25:53.099] [main/WARN] [net.minecraft.command.Commands/]: Ambiguity between arguments [teleport, location] and [teleport, targets] with inputs: [0.1 -0.5 .9, 0 0 0]
-[10Oct2025 15:25:53.099] [main/WARN] [net.minecraft.command.Commands/]: Ambiguity between arguments [teleport, targets] and [teleport, destination] with inputs: [Player, 0123, dd12be42-52a9-4a91-a8a1-11c01849e498]
-[10Oct2025 15:25:53.100] [main/WARN] [net.minecraft.command.Commands/]: Ambiguity between arguments [teleport, targets, location] and [teleport, targets, destination] with inputs: [0.1 -0.5 .9, 0 0 0]
-[10Oct2025 15:26:09.428] [Server thread/INFO] [ArkCraft/]: ArkCraft: Server starting
-[10Oct2025 15:25:39.580] [main/DEBUG] [mixin/]: Error cleaning class output directory: .mixin.out
-[10Oct2025 15:25:59.821] [modloading-worker-2/INFO] [ArkCraft/]: [ArkCraft] Client mixins loaded.
-[10Oct2025 15:25:59.826] [modloading-worker-2/INFO] [ArkCraft/]: ArkCraft initialized on dist: CLIENT
-[10Oct2025 15:25:59.867] [modloading-worker-2/DEBUG] [mixin/]: Selecting config arkcraft.mixin.json
-[10Oct2025 15:25:59.880] [modloading-worker-2/WARN] [mixin/]: Reference map 'arkcraft.mixin-refmap.json' for arkcraft.mixin.json could not be read. If this is a development environment you can ignore this message
-[10Oct2025 15:25:59.881] [modloading-worker-2/DEBUG] [mixin/]: Preparing arkcraft.mixin.json (1)
-[10Oct2025 15:26:00.348] [modloading-worker-2/INFO] [ArkCraft/]: [ArkCraft] Registered mixin config: arkcraft.mixin.json
-[10Oct2025 15:26:00.428] [modloading-worker-2/INFO] [ArkCraft/]: [ArkCraft] Loaded on CLIENT (production: false)
-[10Oct2025 15:26:00.484] [modloading-worker-2/DEBUG] [net.minecraftforge.fml.AutomaticEventSubscriber/LOADING]: Attempting to inject @EventBusSubscriber classes into the eventbus for arkcraft
-[10Oct2025 15:26:01.410] [Render thread/DEBUG] [net.minecraftforge.fml.client.ClientModLoader/CORE]: Generating PackInfo named mod:arkcraft for mod file /Users/felixriemer/Projects/MinecraftMOD/build/resources/main
-[10Oct2025 15:26:04.001] [Render thread/DEBUG] [mixin/]: Mixing MojangLogoTextureMixin from arkcraft.mixin.json into net.minecraft.client.gui.ResourceLoadProgressGui$MojangLogoTexture
-[10Oct2025 15:26:04.220] [Render thread/INFO] [ArkCraft/]: [ArkCraft] Splash from classpath: assets/arkcraft/textures/gui/splash.png
-[10Oct2025 15:26:04.351] [Worker-Main-9/INFO] [ArkCraft/]: ArkCraft: Common setup
-[10Oct2025 15:26:04.818] [Worker-Main-14/INFO] [ArkCraft/]: ArkCraft: Client setup
-[10Oct2025 15:26:09.186] [Render thread/INFO] [ArkCraft/]: [ArkCraft] Splash from resource manager: arkcraft:textures/gui/splash.png
+[14Oct2025 14:47:48.459] [main/DEBUG] [cpw.mods.modlauncher.LaunchPluginHandler/MODLAUNCHER]: Found launch plugins: [mixin,eventbus,object_holder_definalize,runtime_enum_extender,accesstransformer,capability_inject_definalize,runtimedistcleaner]
+[14Oct2025 14:47:48.527] [main/DEBUG] [cpw.mods.modlauncher.TransformationServicesHandler/MODLAUNCHER]: Found transformer services : [mixin,fml]
+[14Oct2025 14:47:48.529] [main/DEBUG] [cpw.mods.modlauncher.TransformationServiceDecorator/MODLAUNCHER]: Loading service mixin
+[14Oct2025 14:47:48.530] [main/DEBUG] [cpw.mods.modlauncher.TransformationServiceDecorator/MODLAUNCHER]: Loaded service mixin
+[14Oct2025 14:47:48.751] [main/DEBUG] [cpw.mods.modlauncher.TransformationServiceDecorator/MODLAUNCHER]: Initializing transformation service mixin
+[14Oct2025 14:47:48.771] [main/DEBUG] [mixin/]: Mixin bootstrap service org.spongepowered.asm.service.mojang.MixinServiceLaunchWrapperBootstrap is not available: LaunchWrapper is not available
+[14Oct2025 14:47:48.771] [main/DEBUG] [mixin/]: MixinService [ModLauncher] was successfully booted in sun.misc.Launcher$AppClassLoader@18b4aac2
+[14Oct2025 14:47:48.794] [main/INFO] [mixin/]: SpongePowered MIXIN Subsystem Version=0.8.4 Source=file:/Users/felixriemer/.gradle/caches/modules-2/files-2.1/org.spongepowered/mixin/0.8.4/4ec7d77d9ab32596ca0b78bb123956734767e3a/mixin-0.8.4.jar Service=ModLauncher Env=CLIENT
+[14Oct2025 14:47:48.801] [main/DEBUG] [mixin/]: Initialising Mixin Platform Manager
+[14Oct2025 14:47:48.802] [main/DEBUG] [mixin/]: Adding mixin platform agents for container ModLauncher Root Container(ModLauncher:4f56a0a2)
+[14Oct2025 14:47:48.805] [main/DEBUG] [mixin/]: Instancing new MixinPlatformAgentMinecraftForge for ModLauncher Root Container(ModLauncher:4f56a0a2)
+[14Oct2025 14:47:48.807] [main/DEBUG] [mixin/]: MixinPlatformAgentMinecraftForge rejected container ModLauncher Root Container(ModLauncher:4f56a0a2)
+[14Oct2025 14:47:48.809] [main/DEBUG] [mixin/]: Instancing new MixinPlatformAgentDefault for ModLauncher Root Container(ModLauncher:4f56a0a2)
+[14Oct2025 14:47:48.809] [main/DEBUG] [mixin/]: MixinPlatformAgentDefault accepted container ModLauncher Root Container(ModLauncher:4f56a0a2)
+[14Oct2025 14:47:48.812] [main/DEBUG] [cpw.mods.modlauncher.TransformationServiceDecorator/MODLAUNCHER]: Initialized transformation service mixin
+[14Oct2025 14:47:49.568] [main/DEBUG] [cpw.mods.modlauncher.TransformationServiceDecorator/MODLAUNCHER]: Beginning scan trigger - transformation service mixin
+[14Oct2025 14:47:49.570] [main/DEBUG] [cpw.mods.modlauncher.TransformationServiceDecorator/MODLAUNCHER]: End scan trigger - transformation service mixin
+[14Oct2025 14:47:49.810] [main/DEBUG] [net.minecraftforge.fml.loading.LibraryFinder/CORE]: Found JAR manifest_jar at path /Users/felixriemer/.gradle/caches/modules-2/files-2.1/org.spongepowered/mixin/0.8.4/4ec7d77d9ab32596ca0b78bb123956734767e3a/mixin-0.8.4.jar
+[14Oct2025 14:47:50.047] [main/DEBUG] [net.minecraftforge.fml.loading.moddiscovery.ModFileInfo/LOADING]: Found valid mod file main with {arkcraft} mods - versions {NONE}
+[14Oct2025 14:47:50.815] [main/DEBUG] [cpw.mods.modlauncher.TransformationServiceDecorator/MODLAUNCHER]: Initializing transformers for transformation service mixin
+[14Oct2025 14:47:50.816] [main/DEBUG] [cpw.mods.modlauncher.TransformationServiceDecorator/MODLAUNCHER]: Initialized transformers for transformation service mixin
+[14Oct2025 14:47:51.896] [main/DEBUG] [mixin/]: Processing prepare() for PlatformAgent[MixinPlatformAgentDefault:ModLauncher Root Container(ModLauncher:4f56a0a2)]
+[14Oct2025 14:47:51.896] [main/DEBUG] [mixin/]: Processing launch tasks for PlatformAgent[MixinPlatformAgentDefault:ModLauncher Root Container(ModLauncher:4f56a0a2)]
+[14Oct2025 14:47:51.897] [main/DEBUG] [mixin/]: Adding mixin platform agents for container ContainerHandleModLauncher.Resource(client-extra.jar:/Users/felixriemer/.gradle/caches/forge_gradle/minecraft_repo/versions/1.16.5/client-extra.jar)
+[14Oct2025 14:47:51.897] [main/DEBUG] [mixin/]: Instancing new MixinPlatformAgentMinecraftForge for ContainerHandleModLauncher.Resource(client-extra.jar:/Users/felixriemer/.gradle/caches/forge_gradle/minecraft_repo/versions/1.16.5/client-extra.jar)
+[14Oct2025 14:47:51.897] [main/DEBUG] [mixin/]: MixinPlatformAgentMinecraftForge rejected container ContainerHandleModLauncher.Resource(client-extra.jar:/Users/felixriemer/.gradle/caches/forge_gradle/minecraft_repo/versions/1.16.5/client-extra.jar)
+[14Oct2025 14:47:51.898] [main/DEBUG] [mixin/]: Instancing new MixinPlatformAgentDefault for ContainerHandleModLauncher.Resource(client-extra.jar:/Users/felixriemer/.gradle/caches/forge_gradle/minecraft_repo/versions/1.16.5/client-extra.jar)
+[14Oct2025 14:47:51.898] [main/DEBUG] [mixin/]: MixinPlatformAgentDefault accepted container ContainerHandleModLauncher.Resource(client-extra.jar:/Users/felixriemer/.gradle/caches/forge_gradle/minecraft_repo/versions/1.16.5/client-extra.jar)
+[14Oct2025 14:47:51.898] [main/DEBUG] [mixin/]: Processing prepare() for PlatformAgent[MixinPlatformAgentDefault:ContainerHandleModLauncher.Resource(client-extra.jar:/Users/felixriemer/.gradle/caches/forge_gradle/minecraft_repo/versions/1.16.5/client-extra.jar)]
+[14Oct2025 14:47:51.898] [main/DEBUG] [mixin/]: Adding mixin platform agents for container ContainerHandleModLauncher.Resource(main:/Users/felixriemer/Projects/MinecraftMOD/build/resources/main)
+[14Oct2025 14:47:51.898] [main/DEBUG] [mixin/]: Instancing new MixinPlatformAgentMinecraftForge for ContainerHandleModLauncher.Resource(main:/Users/felixriemer/Projects/MinecraftMOD/build/resources/main)
+[14Oct2025 14:47:51.899] [main/DEBUG] [mixin/]: MixinPlatformAgentMinecraftForge rejected container ContainerHandleModLauncher.Resource(main:/Users/felixriemer/Projects/MinecraftMOD/build/resources/main)
+[14Oct2025 14:47:51.899] [main/DEBUG] [mixin/]: Instancing new MixinPlatformAgentDefault for ContainerHandleModLauncher.Resource(main:/Users/felixriemer/Projects/MinecraftMOD/build/resources/main)
+[14Oct2025 14:47:51.899] [main/DEBUG] [mixin/]: MixinPlatformAgentDefault accepted container ContainerHandleModLauncher.Resource(main:/Users/felixriemer/Projects/MinecraftMOD/build/resources/main)
+[14Oct2025 14:47:51.899] [main/DEBUG] [mixin/]: Processing prepare() for PlatformAgent[MixinPlatformAgentDefault:ContainerHandleModLauncher.Resource(main:/Users/felixriemer/Projects/MinecraftMOD/build/resources/main)]
+[14Oct2025 14:47:51.899] [main/DEBUG] [mixin/]: Adding mixin platform agents for container ContainerHandleModLauncher.Resource(forge-1.16.5-36.2.34_mapped_snapshot_20210309-1.16.5-recomp.jar:/Users/felixriemer/.gradle/caches/forge_gradle/minecraft_user_repo/net/minecraftforge/forge/1.16.5-36.2.34_mapped_snapshot_20210309-1.16.5/forge-1.16.5-36.2.34_mapped_snapshot_20210309-1.16.5-recomp.jar)
+[14Oct2025 14:47:51.899] [main/DEBUG] [mixin/]: Instancing new MixinPlatformAgentMinecraftForge for ContainerHandleModLauncher.Resource(forge-1.16.5-36.2.34_mapped_snapshot_20210309-1.16.5-recomp.jar:/Users/felixriemer/.gradle/caches/forge_gradle/minecraft_user_repo/net/minecraftforge/forge/1.16.5-36.2.34_mapped_snapshot_20210309-1.16.5/forge-1.16.5-36.2.34_mapped_snapshot_20210309-1.16.5-recomp.jar)
+[14Oct2025 14:47:51.899] [main/DEBUG] [mixin/]: MixinPlatformAgentMinecraftForge rejected container ContainerHandleModLauncher.Resource(forge-1.16.5-36.2.34_mapped_snapshot_20210309-1.16.5-recomp.jar:/Users/felixriemer/.gradle/caches/forge_gradle/minecraft_user_repo/net/minecraftforge/forge/1.16.5-36.2.34_mapped_snapshot_20210309-1.16.5/forge-1.16.5-36.2.34_mapped_snapshot_20210309-1.16.5-recomp.jar)
+[14Oct2025 14:47:51.899] [main/DEBUG] [mixin/]: Instancing new MixinPlatformAgentDefault for ContainerHandleModLauncher.Resource(forge-1.16.5-36.2.34_mapped_snapshot_20210309-1.16.5-recomp.jar:/Users/felixriemer/.gradle/caches/forge_gradle/minecraft_user_repo/net/minecraftforge/forge/1.16.5-36.2.34_mapped_snapshot_20210309-1.16.5/forge-1.16.5-36.2.34_mapped_snapshot_20210309-1.16.5-recomp.jar)
+[14Oct2025 14:47:51.899] [main/DEBUG] [mixin/]: MixinPlatformAgentDefault accepted container ContainerHandleModLauncher.Resource(forge-1.16.5-36.2.34_mapped_snapshot_20210309-1.16.5-recomp.jar:/Users/felixriemer/.gradle/caches/forge_gradle/minecraft_user_repo/net/minecraftforge/forge/1.16.5-36.2.34_mapped_snapshot_20210309-1.16.5/forge-1.16.5-36.2.34_mapped_snapshot_20210309-1.16.5-recomp.jar)
+[14Oct2025 14:47:51.899] [main/DEBUG] [mixin/]: Processing prepare() for PlatformAgent[MixinPlatformAgentDefault:ContainerHandleModLauncher.Resource(forge-1.16.5-36.2.34_mapped_snapshot_20210309-1.16.5-recomp.jar:/Users/felixriemer/.gradle/caches/forge_gradle/minecraft_user_repo/net/minecraftforge/forge/1.16.5-36.2.34_mapped_snapshot_20210309-1.16.5/forge-1.16.5-36.2.34_mapped_snapshot_20210309-1.16.5-recomp.jar)]
+[14Oct2025 14:47:51.899] [main/DEBUG] [mixin/]: inject() running with 4 agents
+[14Oct2025 14:47:51.899] [main/DEBUG] [mixin/]: Processing inject() for PlatformAgent[MixinPlatformAgentDefault:ModLauncher Root Container(ModLauncher:4f56a0a2)]
+[14Oct2025 14:47:51.899] [main/DEBUG] [mixin/]: Processing inject() for PlatformAgent[MixinPlatformAgentDefault:ContainerHandleModLauncher.Resource(client-extra.jar:/Users/felixriemer/.gradle/caches/forge_gradle/minecraft_repo/versions/1.16.5/client-extra.jar)]
+[14Oct2025 14:47:51.899] [main/DEBUG] [mixin/]: Processing inject() for PlatformAgent[MixinPlatformAgentDefault:ContainerHandleModLauncher.Resource(main:/Users/felixriemer/Projects/MinecraftMOD/build/resources/main)]
+[14Oct2025 14:47:51.900] [main/DEBUG] [mixin/]: Processing inject() for PlatformAgent[MixinPlatformAgentDefault:ContainerHandleModLauncher.Resource(forge-1.16.5-36.2.34_mapped_snapshot_20210309-1.16.5-recomp.jar:/Users/felixriemer/.gradle/caches/forge_gradle/minecraft_user_repo/net/minecraftforge/forge/1.16.5-36.2.34_mapped_snapshot_20210309-1.16.5/forge-1.16.5-36.2.34_mapped_snapshot_20210309-1.16.5-recomp.jar)]
+[14Oct2025 14:47:51.980] [main/DEBUG] [mixin/]: Error cleaning class output directory: .mixin.out
+[14Oct2025 14:47:51.984] [main/DEBUG] [mixin/]: Preparing mixins for MixinEnvironment[DEFAULT]
+[14Oct2025 14:48:05.481] [modloading-worker-2/INFO] [ArkCraft/]: [ArkCraft] Early mixin loaded: arkcraft-early.mixin.json
+[14Oct2025 14:48:05.489] [modloading-worker-11/DEBUG] [mixin/]: Checking for additional mixins for MixinEnvironment[DEFAULT]
+[14Oct2025 14:48:05.491] [modloading-worker-11/DEBUG] [mixin/]: Selecting config arkcraft-early.mixin.json
+[14Oct2025 14:48:05.501] [modloading-worker-11/WARN] [mixin/]: Reference map 'arkcraft-early.mixin-refmap.json' for arkcraft-early.mixin.json could not be read. If this is a development environment you can ignore this message
+[14Oct2025 14:48:05.502] [modloading-worker-11/DEBUG] [mixin/]: Preparing arkcraft-early.mixin.json (1)
+[14Oct2025 14:48:05.643] [modloading-worker-11/DEBUG] [mixin/]: Registering new injector for @Inject with org.spongepowered.asm.mixin.injection.struct.CallbackInjectionInfo
+[14Oct2025 14:48:05.653] [modloading-worker-11/DEBUG] [mixin/]: Registering new injector for @ModifyArg with org.spongepowered.asm.mixin.injection.struct.ModifyArgInjectionInfo
+[14Oct2025 14:48:05.658] [modloading-worker-11/DEBUG] [mixin/]: Registering new injector for @ModifyArgs with org.spongepowered.asm.mixin.injection.struct.ModifyArgsInjectionInfo
+[14Oct2025 14:48:05.661] [modloading-worker-11/DEBUG] [mixin/]: Registering new injector for @Redirect with org.spongepowered.asm.mixin.injection.struct.RedirectInjectionInfo
+[14Oct2025 14:48:05.665] [modloading-worker-11/DEBUG] [mixin/]: Registering new injector for @ModifyVariable with org.spongepowered.asm.mixin.injection.struct.ModifyVariableInjectionInfo
+[14Oct2025 14:48:05.673] [modloading-worker-11/DEBUG] [mixin/]: Registering new injector for @ModifyConstant with org.spongepowered.asm.mixin.injection.struct.ModifyConstantInjectionInfo
+[14Oct2025 14:48:05.952] [modloading-worker-2/INFO] [ArkCraft/]: [ArkCraft] Initialized on dist: CLIENT (production: false)
+[14Oct2025 14:48:06.018] [modloading-worker-2/DEBUG] [net.minecraftforge.fml.AutomaticEventSubscriber/LOADING]: Attempting to inject @EventBusSubscriber classes into the eventbus for arkcraft
+[14Oct2025 14:48:06.655] [Render thread/DEBUG] [net.minecraftforge.fml.client.ClientModLoader/CORE]: Generating PackInfo named mod:arkcraft for mod file /Users/felixriemer/Projects/MinecraftMOD/build/resources/main
+[14Oct2025 14:48:09.076] [Render thread/DEBUG] [mixin/]: Mixing MojangLogoTextureMixin from arkcraft-early.mixin.json into net.minecraft.client.gui.ResourceLoadProgressGui$MojangLogoTexture
+[14Oct2025 14:48:09.352] [Render thread/INFO] [ArkCraft/]: [ArkCraft] Splash from classpath: assets/arkcraft/textures/gui/splash.png
+[14Oct2025 14:48:09.527] [Worker-Main-11/INFO] [ArkCraft/]: ArkCraft: Common setup
+[14Oct2025 14:48:14.041] [Render thread/INFO] [ArkCraft/]: [ArkCraft] Splash from resource manager: arkcraft:textures/gui/splash.png
+[14Oct2025 14:48:15.139] [Render thread/INFO] [ArkCraft/]: [ArkCraft] Auto-connecting to localhost:25565
+[14Oct2025 14:48:15.350] [Render thread/ERROR] [ArkCraft/]: [ArkCraft] Auto-boot failed: java.lang.ExceptionInInitializerError
+		/mixin-0.8.4.jar mixin PLUGINSERVICE 
+		/mixin-0.8.4.jar mixin TRANSFORMATIONSERVICE 
+		main                                              |ArkCraft                      |arkcraft                      |NONE                |DONE      |Manifest: NOSIGNATURE
