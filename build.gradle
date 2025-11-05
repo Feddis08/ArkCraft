@@ -1,56 +1,67 @@
+// --- Buildscript zuerst! ---
 buildscript {
     repositories {
         maven { url = 'https://maven.minecraftforge.net' }
-        maven { url = 'https://repo.spongepowered.org/repository/maven-public/' } // <— wichtig für mixingradle
+        maven { url = 'https://repo.spongepowered.org/repository/maven-public/' } // für MixinGradle
         mavenCentral()
     }
     dependencies {
         classpath group: 'net.minecraftforge.gradle', name: 'ForgeGradle', version: '5.1.+', changing: true
-        classpath 'org.spongepowered:mixingradle:0.7-SNAPSHOT'                    // <— Mixin Gradle Plugin
+        classpath 'org.spongepowered:mixingradle:0.7-SNAPSHOT'
     }
 }
 
+// --- Plugins per "apply" (kein plugins{}-Block) ---
+apply plugin: 'java'                      // nötig für Toolchains
 apply plugin: 'net.minecraftforge.gradle'
-apply plugin: 'org.spongepowered.mixin'     // <— statt plugins{}-Block
+apply plugin: 'org.spongepowered.mixin'
 apply plugin: 'eclipse'
 apply plugin: 'maven-publish'
+
+// ---------------------------
+//  Java / Toolchain Setup
+// ---------------------------
+java {
+    toolchain {
+        languageVersion = JavaLanguageVersion.of(8)
+        vendor = JvmVendorSpec.ADOPTOPENJDK   // statt ADOPTIUM
+
+    }
+}
+
+println('Java: ' + System.getProperty('java.version') +
+        ' JVM: ' + System.getProperty('java.vm.version') +
+        ' (' + System.getProperty('java.vendor') +
+        ') Arch: ' + System.getProperty('os.arch'))
 
 version = '0.1.0'
 group = 'at.riemer.arkcraft'
 archivesBaseName = 'arkcraft'
 
-java.toolchain.languageVersion = JavaLanguageVersion.of(8)
-
-println('Java: ' + System.getProperty('java.version') +
-        ' JVM: ' + System.getProperty('java.vm.version') +
-        '(' + System.getProperty('java.vendor') +
-        ') Arch: ' + System.getProperty('os.arch'))
-
+// ---------------------------
+//  Minecraft / Forge Setup
+// ---------------------------
 minecraft {
     mappings channel: 'snapshot', version: '20210309-1.16.5'
 
     runs {
         client {
             workingDirectory project.file('run/client')
-
-            // Set fake login / offline mode user
             args '--username', 'Felix', '--demo', 'false'
             jvmArg '-Dfml.doNotCheckOnline=true'
             jvmArg '-DallowInsecureLocalConnections=true'
             jvmArg '-Duser.name=Felix'
             property 'allowInsecureLocalConnections', 'true'
-
-            mods {
-                arkcraft { source sourceSets.main }
-            }
+            mods { arkcraft { source sourceSets.main } }
         }
 
         server {
             workingDirectory project.file('run/server')
-            property 'forge.server.noGui', 'true' // 👈 wichtig!
+            property 'forge.server.noGui', 'true'
             property 'forge.logging.console.level', 'debug'
             mods { arkcraft { source sourceSets.main } }
         }
+
         data {
             workingDirectory project.file('run/data')
             property 'forge.logging.markers', 'REGISTRIES'
@@ -63,6 +74,9 @@ minecraft {
     }
 }
 
+// ---------------------------
+//  Ressourcen + Abhängigkeiten
+// ---------------------------
 sourceSets.main.resources { srcDir 'src/generated/resources' }
 
 repositories {
@@ -78,11 +92,13 @@ dependencies {
 
 mixin {
     add sourceSets.main, "arkcraft.mixin-refmap.json"
-    // optional, aber hilfreich beim Debuggen:
     debug.verbose = true
     dumpTargetOnFailure = true
 }
 
+// ---------------------------
+//  Build / Publishing
+// ---------------------------
 jar {
     manifest {
         attributes([
@@ -92,7 +108,7 @@ jar {
                 "Implementation-Title": project.name,
                 "Implementation-Version": "${version}",
                 "Implementation-Vendor": "Felix Riemer",
-                "Implementation-Timestamp": new Date().format("yyyy-MM-dd'T'HH:mm:ssZ"),
+                "Implementation-Timestamp": new Date().format("yyyy-MM-dd'T'HH:mm:ssZ")
         ])
     }
 }
@@ -100,10 +116,19 @@ jar {
 jar.finalizedBy('reobfJar')
 
 publishing {
-    publications { mavenJava(MavenPublication) { artifact jar } }
-    repositories { maven { url "file:///${project.projectDir}/mcmodsrepo" } }
+    publications {
+        mavenJava(MavenPublication) {
+            artifact jar
+        }
+    }
+    repositories {
+        maven { url "file:///${project.projectDir}/mcmodsrepo" }
+    }
 }
 
+// ---------------------------
+//  LWJGL Fix (Forge 1.16.x Bug)
+// ---------------------------
 configurations.all {
     resolutionStrategy.eachDependency { details ->
         if (details.requested.group == "org.lwjgl") {
