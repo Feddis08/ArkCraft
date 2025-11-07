@@ -1,4 +1,4 @@
-package at.RIEMER.core.mixin;
+package at.RIEMER.client.mixin;
 
 import at.RIEMER.core.Main;
 import com.mojang.blaze3d.matrix.MatrixStack;

@@ -14,7 +14,7 @@ import org.apache.logging.log4j.Logger;
 import org.lwjgl.glfw.GLFW;
 
 @Mod.EventBusSubscriber(modid = Main.MOD_ID, bus = Mod.EventBusSubscriber.Bus.FORGE, value = Dist.CLIENT)
-public final class DevAutoBoot {
+public final class ConnectToServerAfterBoot {
     private static final Logger LOG = LogManager.getLogger("ArkCraft");
 
     // Steuerung per VM-Args (bevorzugt):

@@ -1,7 +1,7 @@
 {
   "required": true,
   "minVersion": "0.8.4",
-  "package": "at.RIEMER.core.mixin",
+  "package": "at.RIEMER.client.mixin",
   "refmap": "arkcraft-early.mixin-refmap.json",
   "compatibilityLevel": "JAVA_8",
   "client": [
