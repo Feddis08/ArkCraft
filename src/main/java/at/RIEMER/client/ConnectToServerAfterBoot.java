@@ -17,10 +17,6 @@ import org.lwjgl.glfw.GLFW;
 public final class ConnectToServerAfterBoot {
     private static final Logger LOG = LogManager.getLogger("ArkCraft");
 
-    // Steuerung per VM-Args (bevorzugt):
-    //   -Darkcraft.skipMenu=true
-    //   -Darkcraft.autoJoin=localhost:25565
-    // Alternativ auch mit "arkcraft.*" (Fallback unten).
     private static boolean pending = false;
     private static HostPort target = null;
 
@@ -42,13 +38,7 @@ public final class ConnectToServerAfterBoot {
         }
 
         // Properties lesen (beide Namen unterstützt)
-        String skipProp = System.getProperty("Darkcraft.skipMenu",
-                System.getProperty("arkcraft.skipMenu", "true"));
-        String joinProp = System.getProperty("Darkcraft.autoJoin",
-                System.getProperty("arkcraft.autoJoin", "localhost:25565"));
-
-        boolean skipMenu = Boolean.parseBoolean(skipProp);
-        if (!skipMenu || joinProp == null || joinProp.isEmpty()) return;
+        String joinProp = ClientConfig.ServerAddress;
 
         target = parseHostPort(joinProp);
         pending = true; // im nächsten Client-Tick verbinden

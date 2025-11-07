@@ -4,11 +4,16 @@ import net.minecraft.client.Minecraft;
 import net.minecraftforge.api.distmarker.Dist;
 import net.minecraftforge.eventbus.api.SubscribeEvent;
 import net.minecraftforge.fml.common.Mod;
+import net.minecraftforge.fml.javafmlmod.FMLJavaModLoadingContext;
+
 
 @Mod.EventBusSubscriber(modid = "arkcraft", value = Dist.CLIENT, bus = Mod.EventBusSubscriber.Bus.MOD)
-public final class ClientInit {
+public final class ClientBoot{
     @SubscribeEvent
     public static void onClientSetup(final net.minecraftforge.fml.event.lifecycle.FMLClientSetupEvent e) {
+
+        ClientConfig.setArgs();
+
         e.enqueueWork(() -> {
             Minecraft mc = Minecraft.getInstance();
 
@@ -23,5 +28,7 @@ public final class ClientInit {
 
             net.minecraft.client.settings.KeyBinding.resetKeyBindingArrayAndHash();
         });
+        FMLJavaModLoadingContext.get().getModEventBus().addListener(ClientBoot::onClientSetup);
     }
+
 }
