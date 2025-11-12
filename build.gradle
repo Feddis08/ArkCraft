@@ -52,6 +52,11 @@ minecraft {
 
         server {
             workingDirectory project.file('run/server')
+
+            // wichtig: genau so
+            arg "--nogui"
+            jvmArgs "-Djava.awt.headless=true"
+
             mods { arkcraft { source sourceSets.main } }
         }
 
@@ -66,6 +71,7 @@ minecraft {
         }
     }
 }
+
 
 // ---------------------------
 //  Ressourcen + Abhängigkeiten
