@@ -20,7 +20,6 @@ public final class ConnectToServerAfterBoot {
     private static boolean pending = false;
     private static HostPort target = null;
 
-    @SubscribeEvent
     public static void onGuiOpen(GuiOpenEvent e) {
         // Nur reagieren, wenn wirklich das Hauptmenü geöffnet wird
         if (!(e.getGui() instanceof MainMenuScreen)) return;
@@ -45,7 +44,6 @@ public final class ConnectToServerAfterBoot {
         LOG.info("[ArkCraft] Will auto-connect to {}:{}", target.host, target.port);
     }
 
-    @SubscribeEvent
     public static void onClientTick(TickEvent.ClientTickEvent e) {
         if (!pending || e.phase != TickEvent.Phase.END) return;
 
