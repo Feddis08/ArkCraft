@@ -1,19 +1,14 @@
 package at.RIEMER.client;
 
 import com.mojang.blaze3d.matrix.MatrixStack;
+import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.screen.MainMenuScreen;
 import net.minecraft.client.gui.screen.Screen;
 import net.minecraft.client.gui.widget.TextFieldWidget;
 import net.minecraft.client.gui.widget.button.Button;
-import net.minecraft.client.multiplayer.ServerData;
-import net.minecraft.client.network.ServerPinger;
-import net.minecraft.util.text.ITextComponent;
 import net.minecraft.util.text.StringTextComponent;
 
 public class ArkPortalScreen extends Screen {
-
-    private boolean serverOnline = false;
-    private boolean pingDone = false;
 
     private TextFieldWidget nameField;
     private Button connectButton;
@@ -26,91 +21,81 @@ public class ArkPortalScreen extends Screen {
     protected void init() {
         super.init();
 
-        // Server-Ping starten
-        pingServerAsync();
+        int centerX = this.width / 2;
+        int centerY = this.height / 2;
 
-        // FALL 1: kein Token → Name-Feld anzeigen
-        if (!ClientConfig.gotToken) {
+        if (!ClientTokenStorage.hasToken()) {
             nameField = new TextFieldWidget(
                     this.font,
-                    this.width / 2 - 75,
-                    this.height / 2 + 20,
+                    centerX - 75,
+                    centerY,
                     150,
                     20,
-                    new StringTextComponent("Enter Name")
+                    new StringTextComponent("Name")
             );
             this.children.add(nameField);
-
-            connectButton = new Button(
-                    this.width / 2 - 50,
-                    this.height / 2 + 45,
-                    100,
-                    20,
-                    new StringTextComponent("Connect"),
-                    (b) -> onConnectPressed()
-            );
-            this.addButton(connectButton);
         }
-    }
 
-    private void pingServerAsync() {
-        new Thread(() -> {
-            while(true){
-                pingDone = false;
-                try {
-                    ServerPinger pinger = new ServerPinger();
-                    ServerData data = new ServerData("ArkCraft", ClientConfig.ServerAddress, false);
-                    pinger.ping(data, () -> {});
-                    serverOnline = true;
-                } catch (Exception ex) {
-                    serverOnline = false;
-                }
-                pingDone = true;
-                try {
-                    Thread.sleep(3000);
-                } catch (InterruptedException e) {
-                    throw new RuntimeException(e);
-                }
-            }
-        }).start();
+        connectButton = new Button(
+                centerX - 50,
+                centerY + 30,
+                100,
+                20,
+                new StringTextComponent("Connect"),
+                (b) -> onConnectPressed()
+        );
+        this.addButton(connectButton);
     }
-
     private void onConnectPressed() {
-        String name = (nameField != null) ? nameField.getText().trim() : "Unknown";
-        // Hier später Token/Account Logik rein
-        System.out.println("Connecting as: " + name);
+        Minecraft mc = this.minecraft;
+        if (mc == null) return;
+
+        if (!ClientTokenStorage.hasToken()) {
+            String desired = nameField != null ? nameField.getText().trim() : "";
+            if (desired.isEmpty()) {
+                // optional Fehlermeldung
+                return;
+            }
+            ClientSessionOverrideHelper.applyTemporarySessionName(desired);
+        } else {
+            // hier aus dem Token den Namen holen und Session setzen
+            ClientSessionOverrideHelper.applyNameFromTokenIfPresent();
+        }
+
+        // Danach wie gehabt: Server-Adresse aus Config und ConnectingScreen starten
+        String addr = ClientConfig.ServerAddress; // z.B. "localhost:25565"
+        String host = addr;
+        int port = 25565;
+        int idx = addr.lastIndexOf(':');
+        if (idx > 0 && idx < addr.length() - 1) {
+            host = addr.substring(0, idx);
+            try { port = Integer.parseInt(addr.substring(idx + 1)); } catch (NumberFormatException ignored) {}
+        }
+
+        mc.displayGuiScreen(
+                new net.minecraft.client.gui.screen.ConnectingScreen(
+                        new net.minecraft.client.gui.screen.MainMenuScreen(),
+                        mc,
+                        host,
+                        port
+                )
+        );
     }
 
     @Override
     public void render(MatrixStack ms, int mouseX, int mouseY, float partialTicks) {
         this.renderBackground(ms);
 
-        int y = 40;
+        drawCenteredString(ms, this.font, "Willkommen bei ArkCraft!", this.width / 2, 40, 0xFFFFFF);
 
-        // Titel
-        drawCenteredString(ms, this.font, "Willkommen bei Arkcraft", this.width / 2, y, 0xFFFFFF);
-
-        y += 25;
-
-        if (!pingDone) {
-            drawCenteredString(ms, this.font, "Checking server status ...", this.width / 2, y, 0x888888);
-        } else if (serverOnline) {
-            drawCenteredString(ms, this.font, "Game Server is available!", this.width / 2, y, 0x00FF00);
+        if (!ClientTokenStorage.hasToken()) {
+            drawCenteredString(ms, this.font, "Create your account:", this.width / 2, 60, 0xFFCCCC);
         } else {
-            drawCenteredString(ms, this.font, "Server offline", this.width / 2, y, 0xFF0000);
-        }
-
-        y += 25;
-
-        if (!ClientConfig.gotToken) {
-            drawCenteredString(ms, this.font, "You don't have an account - create one!", this.width / 2, y, 0xFF4444);
-        } else {
-            drawCenteredString(ms, this.font, "Account OK – Token present", this.width / 2, y, 0x00AAFF);
+            drawCenteredString(ms, this.font, "Account token found - you will auto-authenticate.", this.width / 2, 60, 0xCCFFCC);
         }
 
         super.render(ms, mouseX, mouseY, partialTicks);
 
-        // Texteingabefeld rendern
         if (nameField != null) {
             nameField.render(ms, mouseX, mouseY, partialTicks);
         }

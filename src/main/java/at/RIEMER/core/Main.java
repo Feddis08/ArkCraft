@@ -5,8 +5,10 @@ import at.RIEMER.server.ServerBoot;
 import net.minecraftforge.common.MinecraftForge;
 import net.minecraftforge.eventbus.api.SubscribeEvent;
 import net.minecraftforge.fml.common.Mod;
+import net.minecraftforge.fml.event.lifecycle.FMLCommonSetupEvent;
 import net.minecraftforge.fml.event.server.FMLServerStartingEvent;
 import net.minecraftforge.api.distmarker.Dist;
+import net.minecraftforge.fml.javafmlmod.FMLJavaModLoadingContext;
 import net.minecraftforge.fml.loading.FMLEnvironment;
 
 import org.apache.logging.log4j.LogManager;
@@ -22,6 +24,7 @@ public class Main {
 
 
     public Main() {
+        FMLJavaModLoadingContext.get().getModEventBus().addListener(this::setup);
         if (FMLEnvironment.dist == Dist.CLIENT)
             EarlyMixinLoader.load();
 
@@ -30,7 +33,11 @@ public class Main {
         LOGGER.info("[ArkCraft] Initialized on dist: {} (production: {})",
                 FMLEnvironment.dist, FMLEnvironment.production);
     }
-
+    private void setup(final FMLCommonSetupEvent event) {
+        event.enqueueWork(() -> {
+            at.RIEMER.network.ArkNetwork.register();
+        });
+    }
     @SubscribeEvent
     public void onServerStarting(FMLServerStartingEvent event) {
         LOGGER.info("ArkCraft: Server starting");

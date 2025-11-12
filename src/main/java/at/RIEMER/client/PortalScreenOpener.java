@@ -1,7 +1,6 @@
 package at.RIEMER.client;
 
 import at.RIEMER.core.Main;
-import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.screen.MainMenuScreen;
 import net.minecraftforge.api.distmarker.Dist;
 import net.minecraftforge.client.event.GuiOpenEvent;
@@ -15,19 +14,11 @@ public final class PortalScreenOpener {
 
     @SubscribeEvent
     public static void onGuiOpen(GuiOpenEvent e) {
-        // Nur beim ersten Öffnen des Hauptmenüs
         if (opened) return;
         if (!(e.getGui() instanceof MainMenuScreen)) return;
 
         opened = true;
-
-        // Original-Hauptmenü merken, damit wir später zurück können
-        Minecraft mc = Minecraft.getInstance();
-        // e.getGui() ist das MainMenuScreen-Objekt
-        ArkPortalScreen portal = new ArkPortalScreen();
-
-        // Ersatz-GUI setzen
-        e.setGui(portal);
+        e.setGui(new ArkPortalScreen());
     }
 
     private PortalScreenOpener() {}
