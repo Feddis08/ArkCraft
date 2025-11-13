@@ -26,6 +26,16 @@ public final class ClientTokenStorage {
         ensureLoaded();
         return cachedToken;
     }
+    public static void removeToken() {
+        try {
+            cachedToken = null;
+            loaded = false;
+            FileHelper.writeFileUtf8(Paths.get(TOKEN_FILE), "");
+            LOG.info("[ArkCraft] Token removed.");
+        } catch (IOException e) {
+            LOG.error("[ArkCraft] Failed to remove token", e);
+        }
+    }
 
     public static void saveToken(String token) {
         cachedToken = token != null ? token.trim() : null;

@@ -1,5 +1,6 @@
 package at.RIEMER.network.packet;
 
+import at.RIEMER.client.login.ClientTokenStorage;
 import net.minecraft.client.Minecraft;
 import net.minecraft.network.PacketBuffer;
 import net.minecraft.util.text.StringTextComponent;
@@ -33,10 +34,6 @@ public class S2CRegistrationErrorPacket {
 
     @OnlyIn(Dist.CLIENT)
     private static void handleClient(S2CRegistrationErrorPacket msg) {
-        Minecraft mc = Minecraft.getInstance();
-        if (mc.player != null) {
-            mc.player.sendMessage(new StringTextComponent("[ArkCraft] " + msg.message), mc.player.getUniqueID());
-        }
-        // Optional: Portal-GUI wieder öffnen / State setzen
+        ClientTokenStorage.removeToken();
     }
 }

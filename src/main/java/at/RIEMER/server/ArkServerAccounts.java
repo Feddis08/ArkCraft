@@ -56,6 +56,7 @@ public final class ArkServerAccounts {
                     PacketDistributor.PLAYER.with(() -> player),
                     new S2CRegistrationErrorPacket("Name already in use: " + name)
             );
+            player.connection.disconnect(new StringTextComponent("Name already in use: " + name));
             return;
         }
 

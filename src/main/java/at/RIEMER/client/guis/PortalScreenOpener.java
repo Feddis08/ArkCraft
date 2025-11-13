@@ -1,6 +1,7 @@
 package at.RIEMER.client.guis;
 
 import at.RIEMER.client.guis.ArkPortalScreen;
+import at.RIEMER.client.login.ClientTokenStorage;
 import at.RIEMER.core.Main;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.screen.MainMenuScreen;
@@ -28,6 +29,8 @@ public final class PortalScreenOpener {
                 || gui instanceof WorldSelectionScreen) {
 
             // override: Portal statt original Screen
+
+
             e.setGui(new ArkPortalScreen());
         }
 
