@@ -1,6 +1,6 @@
 package at.RIEMER.network.packet;
 
-import at.RIEMER.client.ClientTokenStorage;
+import at.RIEMER.client.login.ClientTokenStorage;
 import net.minecraft.client.Minecraft;
 import net.minecraft.network.PacketBuffer;
 import net.minecraftforge.api.distmarker.Dist;

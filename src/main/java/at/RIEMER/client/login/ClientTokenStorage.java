@@ -1,4 +1,4 @@
-package at.RIEMER.client;
+package at.RIEMER.client.login;
 
 import at.RIEMER.core.util.FileHelper;
 import org.apache.logging.log4j.LogManager;

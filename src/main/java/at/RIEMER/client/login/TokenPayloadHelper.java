@@ -1,4 +1,4 @@
-package at.RIEMER.client;
+package at.RIEMER.client.login;
 
 import java.nio.charset.StandardCharsets;
 import java.util.Base64;

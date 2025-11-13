@@ -1,4 +1,4 @@
-package at.RIEMER.client;
+package at.RIEMER.client.login;
 
 import at.RIEMER.network.ArkNetwork;
 import at.RIEMER.network.packet.C2SAuthHelloPacket;

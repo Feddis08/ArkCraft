@@ -1,8 +1,10 @@
-package at.RIEMER.client;
+package at.RIEMER.client.guis;
 
+import at.RIEMER.client.ClientConfig;
+import at.RIEMER.client.login.ClientSessionOverrideHelper;
+import at.RIEMER.client.login.ClientTokenStorage;
 import com.mojang.blaze3d.matrix.MatrixStack;
 import net.minecraft.client.Minecraft;
-import net.minecraft.client.gui.screen.MainMenuScreen;
 import net.minecraft.client.gui.screen.Screen;
 import net.minecraft.client.gui.widget.TextFieldWidget;
 import net.minecraft.client.gui.widget.button.Button;

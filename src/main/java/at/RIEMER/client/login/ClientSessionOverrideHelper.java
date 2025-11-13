@@ -1,4 +1,4 @@
-package at.RIEMER.client;
+package at.RIEMER.client.login;
 
 import net.minecraft.client.Minecraft;
 import net.minecraft.util.Session;
@@ -76,10 +76,10 @@ public final class ClientSessionOverrideHelper {
         }
     }
     public static void applyNameFromTokenIfPresent() {
-        String token = at.RIEMER.client.ClientTokenStorage.getTokenOrNull();
+        String token = ClientTokenStorage.getTokenOrNull();
         if (token == null || token.isEmpty()) return;
 
-        String username = at.RIEMER.client.TokenPayloadHelper.extractUsernameFromToken(token);
+        String username = TokenPayloadHelper.extractUsernameFromToken(token);
         if (username == null || username.isEmpty()) return;
 
         applyTemporarySessionName(username);

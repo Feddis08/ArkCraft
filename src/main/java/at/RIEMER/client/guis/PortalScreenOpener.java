@@ -1,5 +1,6 @@
-package at.RIEMER.client;
+package at.RIEMER.client.guis;
 
+import at.RIEMER.client.guis.ArkPortalScreen;
 import at.RIEMER.core.Main;
 import net.minecraft.client.gui.screen.MainMenuScreen;
 import net.minecraftforge.api.distmarker.Dist;
