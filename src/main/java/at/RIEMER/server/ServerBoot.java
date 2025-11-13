@@ -1,11 +1,14 @@
 package at.RIEMER.server;
 
 import at.RIEMER.core.Main;
+import at.RIEMER.server.database.Database;
+
+import java.sql.SQLException;
 
 public class ServerBoot {
     public static Database db;
 
-    public static void boot(){
+    public static void boot() throws SQLException {
 
 
         System.setProperty("nogui", "true");

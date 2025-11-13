@@ -14,6 +14,8 @@ import net.minecraftforge.fml.loading.FMLEnvironment;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
+import java.sql.SQLException;
+
 @Mod(Main.MOD_ID)
 public class Main {
     public static final String MOD_ID = "arkcraft";
@@ -39,7 +41,7 @@ public class Main {
         });
     }
     @SubscribeEvent
-    public void onServerStarting(FMLServerStartingEvent event) {
+    public void onServerStarting(FMLServerStartingEvent event) throws SQLException {
         LOGGER.info("ArkCraft: Server starting");
         ServerBoot.boot();
     }

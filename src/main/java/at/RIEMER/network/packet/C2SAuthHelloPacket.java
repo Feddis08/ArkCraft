@@ -4,6 +4,7 @@ import net.minecraft.network.PacketBuffer;
 import net.minecraft.entity.player.ServerPlayerEntity;
 import net.minecraftforge.fml.network.NetworkEvent;
 
+import java.sql.SQLException;
 import java.util.function.Supplier;
 
 public class C2SAuthHelloPacket {
@@ -30,7 +31,11 @@ public class C2SAuthHelloPacket {
 
             String token = msg.tokenOrEmpty.trim();
             // Hier delegieren wir an unsere Server-Logik:
-            at.RIEMER.server.ArkServerAccounts.handleAuthHello(player, token);
+            try {
+                at.RIEMER.server.ArkServerAccounts.handleAuthHello(player, token);
+            } catch (SQLException e) {
+                throw new RuntimeException(e);
+            }
         });
         ctx.setPacketHandled(true);
     }
