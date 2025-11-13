@@ -5,6 +5,7 @@ import at.RIEMER.network.ArkNetwork;
 import at.RIEMER.network.packet.S2CRegistrationErrorPacket;
 import at.RIEMER.network.packet.S2CTokenIssuedPacket;
 import net.minecraft.entity.player.ServerPlayerEntity;
+import net.minecraft.util.text.StringTextComponent;
 import net.minecraftforge.fml.network.PacketDistributor;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
@@ -34,10 +35,7 @@ public final class ArkServerAccounts {
                 return;
             } catch (IllegalArgumentException e) {
                 LOG.warn("[ArkCraft] Invalid token from {}: {}", name, e.getMessage());
-                ArkNetwork.CHANNEL.send(
-                        PacketDistributor.PLAYER.with(() -> player),
-                        new S2CRegistrationErrorPacket("Invalid token - please re-register.")
-                );
+                player.connection.disconnect(new StringTextComponent("Invalid token - please re-register."));
                 return;
             }
         }
