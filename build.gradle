@@ -54,8 +54,8 @@ minecraft {
             workingDirectory project.file('run/server')
 
             // wichtig: genau so
-            arg "--nogui"
-            jvmArgs "-Djava.awt.headless=true"
+            //arg "--nogui"
+            //jvmArgs "-Djava.awt.headless=true"
 
             mods { arkcraft { source sourceSets.main } }
         }
