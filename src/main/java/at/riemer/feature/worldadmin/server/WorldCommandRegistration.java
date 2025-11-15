@@ -2,7 +2,7 @@ package at.riemer.feature.worldadmin.server;
 
 import at.riemer.core.Main;
 import at.riemer.feature.worldadmin.network.S2CWorldListPacket;
-import at.riemer.network.ArkNetwork;
+import at.riemer.core.ArkNetwork;
 import com.mojang.brigadier.builder.LiteralArgumentBuilder;
 import net.minecraft.command.CommandSource;
 import net.minecraft.command.Commands;

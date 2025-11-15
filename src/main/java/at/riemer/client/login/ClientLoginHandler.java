@@ -1,7 +1,7 @@
 package at.riemer.client.login;
 
-import at.riemer.network.ArkNetwork;
-import at.riemer.network.packet.C2SAuthHelloPacket;
+import at.riemer.core.ArkNetwork;
+import at.riemer.client.login.network.C2SAuthHelloPacket;
 import net.minecraftforge.api.distmarker.Dist;
 import net.minecraftforge.eventbus.api.SubscribeEvent;
 import net.minecraftforge.fml.common.Mod;

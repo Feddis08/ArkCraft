@@ -1,4 +1,4 @@
-package at.riemer.network.packet;
+package at.riemer.client.login.network;
 
 import net.minecraft.network.PacketBuffer;
 import net.minecraft.entity.player.ServerPlayerEntity;

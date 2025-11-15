@@ -2,7 +2,7 @@ package at.riemer.feature.worldadmin.client;
 
 import at.riemer.feature.worldadmin.network.C2SWorldAdminActionPacket;
 import at.riemer.feature.worldadmin.network.S2CWorldListPacket;
-import at.riemer.network.ArkNetwork;
+import at.riemer.core.ArkNetwork;
 import com.mojang.blaze3d.matrix.MatrixStack;
 import net.minecraft.client.gui.screen.Screen;
 import net.minecraft.client.gui.widget.button.Button;

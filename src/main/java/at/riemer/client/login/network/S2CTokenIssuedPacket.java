@@ -1,4 +1,4 @@
-package at.riemer.network.packet;
+package at.riemer.client.login.network;
 
 import at.riemer.client.login.ClientTokenStorage;
 import net.minecraft.client.Minecraft;

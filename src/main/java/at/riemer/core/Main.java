@@ -1,22 +1,16 @@
 package at.riemer.core;
 
 import at.riemer.client.mixin.EarlyMixinLoader;
-import at.riemer.network.ArkNetwork;
-import at.riemer.server.ServerBoot;
 import net.minecraftforge.common.MinecraftForge;
-import net.minecraftforge.eventbus.api.SubscribeEvent;
 import net.minecraftforge.fml.common.Mod;
 import net.minecraftforge.fml.event.lifecycle.FMLCommonSetupEvent;
 import net.minecraftforge.fml.event.lifecycle.FMLClientSetupEvent;
-import net.minecraftforge.fml.event.server.FMLServerStartingEvent;
 import net.minecraftforge.api.distmarker.Dist;
 import net.minecraftforge.fml.javafmlmod.FMLJavaModLoadingContext;
 import net.minecraftforge.fml.loading.FMLEnvironment;
 
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
-
-import java.sql.SQLException;
 
 @Mod(Main.MOD_ID)
 public class Main {

@@ -1,12 +1,11 @@
-package at.riemer.network;
+package at.riemer.core;
 
-import at.riemer.core.Main;
 import at.riemer.feature.worldadmin.client.WorldAdminClientHandler;
 import at.riemer.feature.worldadmin.network.C2SWorldAdminActionPacket;
 import at.riemer.feature.worldadmin.network.S2CWorldListPacket;
-import at.riemer.network.packet.C2SAuthHelloPacket;
-import at.riemer.network.packet.S2CRegistrationErrorPacket;
-import at.riemer.network.packet.S2CTokenIssuedPacket;
+import at.riemer.client.login.network.C2SAuthHelloPacket;
+import at.riemer.client.login.network.S2CRegistrationErrorPacket;
+import at.riemer.client.login.network.S2CTokenIssuedPacket;
 import net.minecraft.util.ResourceLocation;
 import net.minecraftforge.api.distmarker.Dist;
 import net.minecraftforge.fml.DistExecutor;

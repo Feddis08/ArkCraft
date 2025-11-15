@@ -1,9 +1,9 @@
 package at.riemer.server;
 
 import at.riemer.core.util.SignedTokenHelper;
-import at.riemer.network.ArkNetwork;
-import at.riemer.network.packet.S2CRegistrationErrorPacket;
-import at.riemer.network.packet.S2CTokenIssuedPacket;
+import at.riemer.core.ArkNetwork;
+import at.riemer.client.login.network.S2CRegistrationErrorPacket;
+import at.riemer.client.login.network.S2CTokenIssuedPacket;
 import at.riemer.server.database.objects.DatabasePlayer;
 import net.minecraft.entity.player.ServerPlayerEntity;
 import net.minecraft.util.text.StringTextComponent;

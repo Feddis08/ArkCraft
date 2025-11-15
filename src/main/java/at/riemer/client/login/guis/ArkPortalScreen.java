@@ -1,4 +1,4 @@
-package at.riemer.client.guis;
+package at.riemer.client.login.guis;
 
 import at.riemer.client.ClientConfig;
 import at.riemer.client.login.ClientSessionOverrideHelper;
