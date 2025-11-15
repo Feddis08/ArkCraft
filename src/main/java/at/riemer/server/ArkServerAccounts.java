@@ -4,6 +4,7 @@ import at.riemer.core.util.SignedTokenHelper;
 import at.riemer.core.ArkNetwork;
 import at.riemer.client.login.network.S2CRegistrationErrorPacket;
 import at.riemer.client.login.network.S2CTokenIssuedPacket;
+import at.riemer.server.database.Database;
 import at.riemer.server.database.objects.DatabasePlayer;
 import net.minecraft.entity.player.ServerPlayerEntity;
 import net.minecraft.util.text.StringTextComponent;
@@ -26,15 +27,14 @@ public final class ArkServerAccounts {
         String name = player.getGameProfile().getName();
         DatabasePlayer dbPlayer = DatabasePlayer.loadByName(name);
 
-        if (!tokenOrEmpty.isEmpty()) {
+        if (!tokenOrEmpty.isEmpty() && dbPlayer != null) {
             // TODO: Später: Token prüfen
             try {
                 String payload = SignedTokenHelper.verifySignedToken(tokenOrEmpty, SECRET_KEY);
                 LOG.info("[ArkCraft] Player {} provided valid token payload={}", name, payload);
                 // hier könntest du username aus payload auslesen und verifizieren
-                int now = (int) (System.currentTimeMillis() / 1000L); // Sekunden
 
-                dbPlayer.setLastJoined(now);
+                dbPlayer.setLastJoined(Database.currentTimestamp());
                 dbPlayer.save();
 
                 return;
@@ -58,8 +58,7 @@ public final class ArkServerAccounts {
         }
 
         // Name ist frei → registrieren
-        int now = (int) (System.currentTimeMillis() / 1000L); // Sekunden
-        dbPlayer = new DatabasePlayer(name, player.getUniqueID(), now);
+        dbPlayer = new DatabasePlayer(name, player.getUniqueID(), Database.currentTimestamp());
 
         dbPlayer.save();
 

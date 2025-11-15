@@ -8,19 +8,20 @@ import java.util.UUID;
 public class DatabasePlayer {
     private String playerName;
     private UUID uuid;
-    private int joinedAt;
-    private int lastJoined;
+    private Timestamp joinedAt;
+    private Timestamp lastJoined;
     private int gold;
 
     public Connection conn = Database.connection;
 
-    public DatabasePlayer(String playerName, UUID uuid, int joinedAt) {
+    public DatabasePlayer(String playerName, UUID uuid, Timestamp joinedAt) {
         this.playerName = playerName;
         this.uuid = uuid;
         this.joinedAt = joinedAt;
         this.lastJoined = joinedAt;
         this.gold = 0;
     }
+
 
     // =========================
     // SCHEMA / TABLE-SETUP
@@ -42,8 +43,8 @@ public class DatabasePlayer {
                     "CREATE TABLE IF NOT EXISTS players (" +
                             "player_name   VARCHAR(64) NOT NULL PRIMARY KEY," +
                             "uuid          CHAR(36)    NOT NULL," +
-                            "joined_at     INTEGER     NOT NULL," +
-                            "last_joined   INTEGER     NOT NULL," +
+                            "joined_at     TIMESTAMP   NOT NULL," +
+                            "last_joined   TIMESTAMP   NOT NULL," +
                             "gold          INTEGER     NOT NULL DEFAULT 0" +
                             ")"
             );
@@ -52,8 +53,8 @@ public class DatabasePlayer {
         // 2) Sicherstellen, dass alle Spalten existieren
         ensureColumn(conn, "players", "player_name", "VARCHAR(64) NOT NULL PRIMARY KEY");
         ensureColumn(conn, "players", "uuid",        "CHAR(36)    NOT NULL");
-        ensureColumn(conn, "players", "joined_at",   "INTEGER     NOT NULL");
-        ensureColumn(conn, "players", "last_joined", "INTEGER     NOT NULL");
+        ensureColumn(conn, "players", "joined_at",   "TIMESTAMP   NOT NULL");
+        ensureColumn(conn, "players", "last_joined", "TIMESTAMP   NOT NULL");
         ensureColumn(conn, "players", "gold",        "INTEGER     NOT NULL DEFAULT 0");
     }
 
@@ -81,7 +82,7 @@ public class DatabasePlayer {
     }
 
     // =========================
-    // SPEICHERN / LADEN (Beispiele)
+    // SPEICHERN / LADEN
     // =========================
 
     public void save() throws SQLException {
@@ -97,13 +98,12 @@ public class DatabasePlayer {
         try (PreparedStatement ps = conn.prepareStatement(sql)) {
             ps.setString(1, playerName);
             ps.setString(2, uuid.toString());
-            ps.setInt(3, joinedAt);
-            ps.setInt(4, lastJoined);
+            ps.setTimestamp(3, joinedAt);
+            ps.setTimestamp(4, lastJoined);
             ps.setInt(5, gold);
             ps.executeUpdate();
         }
     }
-
 
     public static DatabasePlayer loadByName(String name) throws SQLException {
         Connection conn = Database.connection;
@@ -116,8 +116,8 @@ public class DatabasePlayer {
 
                 String playerName = rs.getString("player_name");
                 UUID uuid = UUID.fromString(rs.getString("uuid"));
-                int joinedAt = rs.getInt("joined_at");
-                int lastJoined = rs.getInt("last_joined");
+                Timestamp joinedAt = rs.getTimestamp("joined_at");
+                Timestamp lastJoined = rs.getTimestamp("last_joined");
                 int gold = rs.getInt("gold");
 
                 DatabasePlayer p = new DatabasePlayer(playerName, uuid, joinedAt);
@@ -128,6 +128,10 @@ public class DatabasePlayer {
         }
     }
 
+    // =========================
+    // Getter / Setter
+    // =========================
+
     public String getPlayerName() {
         return playerName;
     }
@@ -136,11 +140,11 @@ public class DatabasePlayer {
         return uuid;
     }
 
-    public int getJoinedAt() {
+    public Timestamp getJoinedAt() {
         return joinedAt;
     }
 
-    public int getLastJoined() {
+    public Timestamp getLastJoined() {
         return lastJoined;
     }
 
@@ -148,17 +152,15 @@ public class DatabasePlayer {
         return gold;
     }
 
-    public void setJoinedAt(int joinedAt) {
+    public void setJoinedAt(Timestamp joinedAt) {
         this.joinedAt = joinedAt;
     }
 
-    public void setLastJoined(int lastJoined) {
+    public void setLastJoined(Timestamp lastJoined) {
         this.lastJoined = lastJoined;
     }
 
     public void setGold(int gold) {
         this.gold = gold;
     }
-
-    // Getter/Setter kannst du nach Bedarf ergänzen
 }

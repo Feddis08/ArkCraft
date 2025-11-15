@@ -1,6 +1,7 @@
 package at.riemer.core;
 
 import at.riemer.client.mixin.EarlyMixinLoader;
+import at.riemer.server.ServerBoot;
 import net.minecraftforge.common.MinecraftForge;
 import net.minecraftforge.fml.common.Mod;
 import net.minecraftforge.fml.event.lifecycle.FMLCommonSetupEvent;
@@ -11,6 +12,8 @@ import net.minecraftforge.fml.loading.FMLEnvironment;
 
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
+
+import java.sql.SQLException;
 
 @Mod(Main.MOD_ID)
 public class Main {
@@ -40,6 +43,11 @@ public class Main {
         ArkNetwork.registerClientPackets(nextPacketId);
 
         Main.LOGGER.info("[ArkCraft] All packets registered up to ID " + (nextPacketId - 1));
+        try {
+            ServerBoot.boot();
+        } catch (SQLException e) {
+            throw new RuntimeException(e);
+        }
     }
 
     private void clientSetup(final FMLClientSetupEvent event) {

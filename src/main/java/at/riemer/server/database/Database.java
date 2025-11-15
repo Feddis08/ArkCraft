@@ -5,6 +5,7 @@ import at.riemer.server.database.objects.DatabasePlayer;
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.SQLException;
+import java.sql.Timestamp;
 
 public class Database {
 
@@ -43,5 +44,16 @@ public class Database {
             // Optional: Serverstart abbrechen
             // throw new RuntimeException("Could not connect to database", e);
         }
+    }
+    // =========================
+    // Helper: aktueller Zeitpunkt
+    // =========================
+
+    /**
+     * Gibt den aktuellen Zeitpunkt als java.sql.Timestamp zurück.
+     * Dieser Typ wird direkt von JDBC für TIMESTAMP-Spalten verwendet.
+     */
+    public static Timestamp currentTimestamp() {
+        return new Timestamp(System.currentTimeMillis());
     }
 }
