@@ -1,6 +1,7 @@
 package at.riemer.server.database;
 
 import at.riemer.server.database.objects.DatabasePlayer;
+import at.riemer.server.database.objects.DatabaseWorld;
 
 import java.sql.Connection;
 import java.sql.DriverManager;
@@ -38,6 +39,7 @@ public class Database {
 
             // 2) Tabellen sicherstellen
             DatabasePlayer.ensureTable();
+            DatabaseWorld.ensureTable();
 
         } catch (SQLException e) {
             e.printStackTrace();

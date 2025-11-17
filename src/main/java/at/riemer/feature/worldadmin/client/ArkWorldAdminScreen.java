@@ -49,6 +49,16 @@ public class ArkWorldAdminScreen extends Screen {
             index++;
         }
 
+        // Button: Create / Load World
+        this.addButton(new Button(
+                centerX - 80,
+                this.height - 60,
+                160,
+                20,
+                new StringTextComponent("Create / Load World"),
+                (b) -> this.minecraft.displayGuiScreen(new ArkCreateWorldScreen(this))
+        ));
+
         // Close-Button
         this.addButton(new Button(
                 centerX - 40,
